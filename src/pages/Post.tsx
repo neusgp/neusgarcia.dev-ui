@@ -8,7 +8,7 @@ import { PostBody } from "../components/PostBody";
 export const Post = () => {
   const { id } = useParams();
   const { data, error, loading } = useFetch(
-    `http://localhost:1337/api/posts/${id}`
+    `https://neusgarcia-dev-backend.onrender.com/api/posts/${id}`
   );
 
   if (loading) return <p>loading...</p>;

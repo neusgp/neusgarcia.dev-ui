@@ -53,7 +53,9 @@ export const Homepage = () => {
     data: allPosts,
     error,
     loading,
-  } = useFetch("http://localhost:1337/api/posts?populate=media");
+  } = useFetch(
+    "https://neusgarcia-dev-backend.onrender.com/api/posts?populate=media"
+  );
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 760);
