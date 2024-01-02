@@ -9,7 +9,7 @@ export const PostBody = ({
   imageUrl: string;
 }) => {
   return (
-    <div className="md:grid md:grid-cols-3 md:gap-4 flex flex-col-reverse">
+    <div className="md:grid md:grid-cols-3 md:gap-10 flex flex-col-reverse">
       <div className="md:col-span-2 text">
         <ReactMarkdown children={body} />
       </div>
