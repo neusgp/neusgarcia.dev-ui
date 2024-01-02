@@ -4,10 +4,10 @@ import { MenuLink } from "../lib/types";
 
 export const Menu = ({ menuLinks }: { menuLinks: MenuLink[] }) => {
   return (
-    <div className="flex flex-row space-x-10">
+    <div className="flex flex-row space-x-6 md:space-x-10">
       {menuLinks.map((i) => {
         return (
-          <div key={i.path} className="hover">
+          <div key={i.path} className="flex items-center">
             <Link to={i.path}>
               <p className="hover:text-[#d37afd] transition">{i.label}</p>
             </Link>

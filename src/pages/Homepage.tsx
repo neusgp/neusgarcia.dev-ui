@@ -61,8 +61,13 @@ export const Homepage = () => {
     setIsMobile(window.innerWidth <= 760);
   }, []);
 
-  if (loading) return <p>loading...</p>;
-  if (error) return <p>❗️error</p>;
+  if (loading) return <p className="py-8 px-10 md:px-20">Loading...</p>;
+  if (error)
+    return (
+      <p className="py-8 px-10 md:px-20">
+        Hmm... looks like something went down. You can come by another time!
+      </p>
+    );
 
   const isPostsArray = Array.isArray(allPosts);
   return (
