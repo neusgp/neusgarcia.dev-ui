@@ -1,0 +1,50 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* these are global font styles */
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Sono", sans-serif;
+  font-weight: 200;
+  color: #333333;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+  transition: color 0.5s;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+p {
+  padding: 1% 0;
+}
+
+.text {
+  font-family: "Inter", sans-serif;
+  font-weight: lighter;
+  line-height: 1.8;
+  font-size: 15px;
+}
