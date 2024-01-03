@@ -2,7 +2,7 @@ import React from "react";
 
 export const About = () => {
   return (
-    <div className="py-10 px-10 md:px-80">
+    <div className="py-10 px-10 md:px-80 animate-fade">
       <h2 className="py-4">About me</h2>
       <p className="text">
         Hi, what's up! I'm Neus, a 29 yo girl form Catalonia who's based in

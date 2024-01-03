@@ -61,7 +61,8 @@ export const Homepage = () => {
     setIsMobile(window.innerWidth <= 760);
   }, []);
 
-  if (loading) return <p className="py-8 px-10 md:px-20">Loading...</p>;
+  if (loading)
+    return <p className="py-8 px-10 md:px-20 animate-pulse">Loading...</p>;
   if (error)
     return (
       <p className="py-8 px-10 md:px-20">
@@ -71,7 +72,7 @@ export const Homepage = () => {
 
   const isPostsArray = Array.isArray(allPosts);
   return (
-    <div className="py-8 px-10 md:px-20">
+    <div className="py-8 px-10 md:px-20 animate-fade">
       {/* place for something else maybe? */}
       {isPostsArray && <PostsGrid data={allPosts} isMobile={isMobile} />}
     </div>
