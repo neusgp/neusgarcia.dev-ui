@@ -1,40 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 
 import { PostHeader } from "../components/PostHeader";
 import { PostBody } from "../components/PostBody";
+import { useFetchPost } from "../hooks/useFetchPost";
 
 export const Post = () => {
   const { id } = useParams();
-  const { data, error, loading } = useFetch(
+  const {
+    data: post,
+    error,
+    loading,
+  } = useFetchPost(
     `https://neusgarcia-dev-backend.onrender.com/api/posts/${id}`
   );
+  const [loader, setLoader] = useState<boolean>(false);
 
-  const isSinglePost = !!data && !Array.isArray(data);
-  const post = isSinglePost && !!data.attributes;
+  useEffect(() => {
+    const hasPost = !loading && post?.attributes;
+    if (!hasPost) {
+      setTimeout(() => {
+        setLoader(true);
+      }, 1000);
+    }
+    if (hasPost) setLoader(false);
+  }, [loading, post]);
 
-  if (!post || loading)
+  console.log({ loading, loader });
+  if (error)
     return (
-      <div className="py-8 px-10 md:px-20 animate-pulse">
-        <p>Loading...</p>
-      </div>
+      <p className="py-8 px-10 md:px-20">
+        Hmm... looks like something went wrong. You can come by another time!
+      </p>
     );
 
-  const { title, date, location, body, imageUrl } = data.attributes;
+  const isLoading = loading && loader;
 
   return (
     <>
       <div className="py-8 px-10 md:px-20 animate-fade">
-        {!!error && (
-          <p>
-            Hmm... looks like something went down. You can come by another time!
-          </p>
+        {isLoading && (
+          <p className="py-8 px-10 md:px-20 animate-fade">Loading...</p>
         )}
-        {!loading && !error && (
+        {post?.attributes && (
           <>
-            <PostHeader title={title} date={date} location={location} />
-            <PostBody body={body} imageUrl={imageUrl} />
+            <PostHeader
+              title={post?.attributes.title}
+              date={post?.attributes.date}
+              location={post?.attributes.location}
+            />
+            <PostBody
+              body={post?.attributes.body}
+              imageUrl={post?.attributes.imageUrl}
+            />
           </>
         )}
       </div>

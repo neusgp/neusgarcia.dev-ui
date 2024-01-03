@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+import { useFetchPosts } from "../hooks/useFetchPosts";
 import { PostContent } from "../lib/types";
 import { PostPreview } from "../components/PostPreview";
 
@@ -20,19 +20,19 @@ const PostsGridColumn = ({ data }: { data: PostContent[] }) => (
 );
 
 export const PostsGrid = ({
-  data: allPosts,
+  data: posts,
   isMobile,
 }: {
   data: PostContent[];
   isMobile: boolean;
 }) => {
   const { firstCol, secondCol, thirdCol, fourthCol } =
-    getPostsGridColumns(allPosts);
+    getPostsGridColumns(posts);
 
   return (
     <>
       {isMobile ? (
-        <PostsGridColumn data={allPosts} />
+        <PostsGridColumn data={posts} />
       ) : (
         <div className="grid grid-cols-4 gap-4">
           <PostsGridColumn data={firstCol} />
@@ -47,34 +47,48 @@ export const PostsGrid = ({
 
 export const Homepage = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
   //TODO: clean up this component pleaseee
   // maybe do 2 different components, think about the structure
   const {
-    data: allPosts,
+    data: posts,
     error,
     loading,
-  } = useFetch(
+  } = useFetchPosts(
     "https://neusgarcia-dev-backend.onrender.com/api/posts?populate=media"
   );
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 760);
-  }, []);
 
-  if (loading)
-    return <p className="py-8 px-10 md:px-20 animate-pulse">Loading...</p>;
+    const hasPosts = !loading && !!posts;
+    if (hasPosts) {
+      setTimeout(() => {
+        setLoader(true);
+      }, 1000);
+    }
+    if (!hasPosts) setLoader(false);
+  }, [loading, posts]);
+
   if (error)
     return (
       <p className="py-8 px-10 md:px-20">
-        Hmm... looks like something went down. You can come by another time!
+        Hmm... looks like something went wrong. You can come by another time!
       </p>
     );
 
-  const isPostsArray = Array.isArray(allPosts);
+  const isPostsArray = Array.isArray(posts);
+  const isLoading = loading && loader;
+
   return (
-    <div className="py-8 px-10 md:px-20 animate-fade">
-      {/* place for something else maybe? */}
-      {isPostsArray && <PostsGrid data={allPosts} isMobile={isMobile} />}
-    </div>
+    <>
+      <div className="py-8 px-10 md:px-20 animate-fade">
+        {/* place for something else maybe? */}
+        {isLoading && (
+          <p className="py-8 px-10 md:px-20 animate-pulse">Loading...</p>
+        )}
+        {isPostsArray && <PostsGrid data={posts} isMobile={isMobile} />}
+      </div>
+    </>
   );
 };
