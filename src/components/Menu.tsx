@@ -9,7 +9,7 @@ export const Menu = ({ menuLinks }: { menuLinks: MenuLink[] }) => {
         return (
           <div key={i.path} className="flex items-center">
             <Link to={i.path}>
-              <p className="hover:text-[#d37afd] transition">{i.label}</p>
+              <p className="hover:text-[#ce63ff] transition">{i.label}</p>
             </Link>
           </div>
         );
