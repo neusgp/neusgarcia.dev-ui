@@ -54,9 +54,7 @@ export const Homepage = () => {
     data: posts,
     error,
     loading,
-  } = useFetchPosts(
-    "https://neusgarcia-dev-backend.onrender.com/api/posts?populate=media"
-  );
+  } = useFetchPosts("https://neusgarcia-dev-backend.onrender.com/api/posts");
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 760);
