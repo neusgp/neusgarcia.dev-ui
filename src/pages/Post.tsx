@@ -17,7 +17,7 @@ export const Post = () => {
   const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
-    const hasPost = !loading && post?.attributes;
+    const hasPost = !loading && !!post?.attributes;
     if (!hasPost) {
       setTimeout(() => {
         setLoader(true);

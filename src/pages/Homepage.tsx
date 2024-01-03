@@ -60,12 +60,12 @@ export const Homepage = () => {
     setIsMobile(window.innerWidth <= 760);
 
     const hasPosts = !loading && !!posts;
-    if (hasPosts) {
+    if (!hasPosts) {
       setTimeout(() => {
         setLoader(true);
       }, 1000);
     }
-    if (!hasPosts) setLoader(false);
+    if (hasPosts) setLoader(false);
   }, [loading, posts]);
 
   if (error)
@@ -82,9 +82,7 @@ export const Homepage = () => {
     <>
       <div className="py-8 px-10 md:px-20 animate-fade">
         {/* place for something else maybe? */}
-        {isLoading && (
-          <p className="py-8 px-10 md:px-20 animate-pulse">Loading...</p>
-        )}
+        {isLoading && <p className="animate-fade">Loading...</p>}
         {isPostsArray && <PostsGrid data={posts} isMobile={isMobile} />}
       </div>
     </>
