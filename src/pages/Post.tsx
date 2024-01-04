@@ -26,7 +26,6 @@ export const Post = () => {
     if (hasPost) setLoader(false);
   }, [loading, post]);
 
-  console.log({ loading, loader });
   if (error)
     return (
       <p className="py-8 px-10 md:px-20">
