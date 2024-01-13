@@ -13,6 +13,7 @@ export type PostAttributes = {
   publishedAt: string;
   title: string;
   updatedAt: string;
+  html?: string;
 };
 
 export type MenuLink = {

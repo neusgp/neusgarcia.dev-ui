@@ -6,7 +6,7 @@ import { PostPreview } from "../components/PostPreview";
 import { getPostsGridColumns } from "../lib/getPostsGridColumns";
 
 const PostsGridColumn = ({ data }: { data: PostContent[] }) => (
-  <div>
+  <>
     {data.map((post: PostContent) => {
       return (
         <PostPreview
@@ -16,7 +16,7 @@ const PostsGridColumn = ({ data }: { data: PostContent[] }) => (
         />
       );
     })}
-  </div>
+ </>
 );
 
 export const PostsGrid = ({
@@ -25,14 +25,18 @@ export const PostsGrid = ({
 }: {
   data: PostContent[];
   isMobile: boolean;
-}) => {
+  }) => {
+  const ascPosts = [...posts].reverse();
+  
   const { firstCol, secondCol, thirdCol, fourthCol } =
-    getPostsGridColumns(posts);
+    getPostsGridColumns(ascPosts);
 
   return (
     <>
       {isMobile ? (
-        <PostsGridColumn data={posts} />
+        <div className="flex flex-col gap-y-8">
+          <PostsGridColumn data={ascPosts} />
+          </div>
       ) : (
         <div className="grid grid-cols-4 gap-4">
           <PostsGridColumn data={firstCol} />
@@ -77,6 +81,8 @@ export const Homepage = () => {
 
   const isPostsArray = Array.isArray(posts);
   const isLoading = loading && loader;
+
+  console.log()
 
   return (
     <>

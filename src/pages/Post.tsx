@@ -49,7 +49,7 @@ export const Post = () => {
               location={post?.attributes.location}
             />
             <PostBody
-              body={post?.attributes.body}
+              body={post?.attributes.body} html={post?.attributes.html}
               imageUrl={post?.attributes.imageUrl}
             />
           </>

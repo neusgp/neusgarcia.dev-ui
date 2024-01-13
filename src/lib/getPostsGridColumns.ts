@@ -1,7 +1,8 @@
 import { PostContent } from "./types";
 
 export const getPostsGridColumns = (data: PostContent[]) => {
-
+    
+    
     const isMultipleOfTwo = (i: number) => (i + 1) % 2 === 0;
     const isNotMultipleOftwo = (i: number) => (i + 1) % 2 !== 0;
 
